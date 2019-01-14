@@ -2,19 +2,19 @@
 
 ## 1. 今天的日期
 
-lcltime1.c
+### 1. lcltime1.c
 
 获取并显示当前（运行程序时）日期和时间的程序。***C语言标准库***提供了两种表示日期和时间的类型，即`time_t`型的日历时间和`struct tm`型的分解时间。使用localtime函数能把日历时间转化为本地时间表示的分解时间。
 
-lcltime2.c
-
+### 2. lcltime2.c
 与1不一样的是，2利用了asctime函数。
 
-lcltime3.c
-
+### 3. lcltime3.c
 与1不一样的是，3利用了ctime函数。
 
-utctime1.c
-
+### 4. utctime1.c
 使用了gmtime函数，把日历时间转化为协调世界时表示的分解时间。
 
+## 2. 一段时间
+### 1. mental.c
+一个心算游戏。使用difftime函数求两个日历时间的差。而不是使用clock_t类型和clock函数求两个时钟数的差。

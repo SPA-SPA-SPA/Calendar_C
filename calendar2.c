@@ -32,7 +32,7 @@ int monthdays(int year, int month)
     return mday[month] + is_leap(year);     // 当month月为2月
 }
 
-/*---把y年m月的日历存入二位数组s中---*/
+/*---把y年m月的日历存入二维数组s中---*/
 void make_calendar(int y, int m, char s[7][22])
 {
     int i, k;
@@ -55,9 +55,9 @@ void make_calendar(int y, int m, char s[7][22])
         if(++wd % 7 == 0)                       // 存入星期六后
             k++;                                // 移到下一行
     }
-    if(wd % 7 == 0)
-        k--;
-    else{
+    if(wd % 7 == 0)                             // 如果最后一日是星期六，那么k一定已经移到下一行了
+        k--;                                    // 所以要先把k退回来
+    else{                                       // 如果不是，那么k就还没移到下一行
         for(wd %= 7; wd < 7; wd++)              // 在最后一日的右侧追加空白字符
             strcat(s[k], "   ");
     }
@@ -84,7 +84,7 @@ void print(char sbuf[3][7][22], int n)
     for( i = 1; i < 7; i++)                     // 把日历的主体部分
     {
         for(j = 0; j < n; j++)                  // 横向排列n个
-            printf("%s   ", sbuf[j][i]);       // 并显示
+            printf("%s   ", sbuf[j][i]);        // 并显示
         putchar('\n');
     }
     putchar('\n');
@@ -108,12 +108,12 @@ void put_calendar(int y1, int m1, int y2, int m2)
         }
         m++;                                    // 到下一个月
         
-        if (m == 13 && y < y2) {                // 转入下一年
-            y++;
+        if (m == 13 && y < y2) {                // 转入下一年。其实有很多问题的，如果输入的是无意义的月份，
+            y++;                                // 不一定会得出正确结果
             m = 1;
         }
     }
-    if(n)                                       // 如果有未显示的月份
+    if(n)                                       // 如果有未显示的月份（如n=1或2时）
         print(sbuf, n);                         // 就显示该月份
 }
 
